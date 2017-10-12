@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       cookies.signed[:user_id] = @user.id
-      flash[:success] = "Welcome #{@user.username} to CubeBlog!"
+      flash[:success] = "Welcome #{@user.name} to CubeBlog!"
       redirect_to root_path
     else
       redirect_back(fallback_location: root_path)
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
 private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
   
   def set_user
